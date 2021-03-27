@@ -1,12 +1,16 @@
 /* Requiring Dependencies */
 const express = require('express')
+const morgan = require('morgan')
 
+
+const postRoute = require('./routes/post')
 
 const app = express()
 
-app.get('/', (req, res) => {
-    res.send("Hello world from NodeJS")
-})
+app.use(morgan("dev"))
+
+app.use('/', postRoute)
+
 
 
 app.listen(8080, () => {
