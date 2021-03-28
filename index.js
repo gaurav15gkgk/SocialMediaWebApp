@@ -2,7 +2,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const mongooose = require('mongoose')
-const bodyParser = require('body-parser')
+const ExpressValidator = require('express-validator')
 
 require('dotenv').config()
 
@@ -14,10 +14,9 @@ const app = express()
 
 // Middlewares
 app.use(morgan("dev"))
-app.use(bodyParser.json())
-
+app.use(express.json())
+app.use(ExpressValidator())
 app.use('/', postRoute);
-
 
 
 
