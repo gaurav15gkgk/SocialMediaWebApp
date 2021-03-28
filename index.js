@@ -8,6 +8,7 @@ require('dotenv').config()
 
 
 const postRoute = require('./routes/post')
+const authRoutes = require('./routes/auth')
 
 
 const app = express()
@@ -17,6 +18,7 @@ app.use(morgan("dev"))
 app.use(express.json())
 app.use(ExpressValidator())
 app.use('/', postRoute);
+app.use('/', authRoutes);
 
 
 
