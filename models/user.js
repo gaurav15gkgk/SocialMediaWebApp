@@ -50,6 +50,10 @@ userSchema
 //methods
 
 userSchema.methods = {
+
+    authenticate: function(inputPassword){
+        return this.encryptPassword(inputPassword) === this.hashed_password;
+    },
     encryptPassword : function (password){
         if(!password){
             return "";

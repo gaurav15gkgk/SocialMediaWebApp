@@ -3,6 +3,7 @@ const express = require('express')
 const morgan = require('morgan')
 const mongooose = require('mongoose')
 const ExpressValidator = require('express-validator')
+const cookieParser = require('cookie-parser')
 
 require('dotenv').config()
 
@@ -17,6 +18,7 @@ const app = express()
 app.use(morgan("dev"))
 app.use(express.json())
 app.use(ExpressValidator())
+app.use(cookieParser())
 app.use('/', postRoute);
 app.use('/', authRoutes);
 
