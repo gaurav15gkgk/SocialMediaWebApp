@@ -1,4 +1,7 @@
+const _ = require('lodash')
+
 const User = require('../models/user')
+
 
 const userById = async (req, res, next, id ) => {
    await  User.findById(id).exec((err, user) => {
@@ -42,9 +45,26 @@ const getUser = (req, res ) => {
     return res.json(req.profile);
 }
 
+const updateUser = (req, res, next) => {
+    let user = req.profile;
+    user = _.extend(user, req.body)
+    user.updated = Date.now()
+    user.save(err => {
+        if(err){
+            return res.status(400).json({
+                error: "You are not authorized to preform this action "
+            })
+        }
+        user.hashed_password = undefined
+        user.salt = undefined
+        res.json({ user })
+    })
+}
+
 module.exports = {
     userById,
     hasAuthourization,
     allUsers,
-    getUser
+    getUser,
+    updateUser
 }
