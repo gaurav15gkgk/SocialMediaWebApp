@@ -10,6 +10,7 @@ require('dotenv').config()
 
 const postRoute = require('./routes/post')
 const authRoutes = require('./routes/auth')
+const UserRoutes = require('./routes/user')
 
 
 const app = express()
@@ -20,7 +21,8 @@ app.use(express.json())
 app.use(ExpressValidator())
 app.use(cookieParser())
 app.use('/', postRoute);
-app.use('/', authRoutes);
+app.use('/', authRoutes); 
+app.use('/', UserRoutes);
 
 app.use( (err, req, res, next ) => {
     if(err.name === "UnauthorizedError"){

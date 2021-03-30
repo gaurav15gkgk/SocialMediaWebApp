@@ -24,7 +24,20 @@ const hasAuthourization = (req, res, next) => {
     }
 }
 
+const allUsers = async(req, res) => {
+    User.find((err, users) => {
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
+        }
+        res.json({ users })
+
+    }).select("name email updated created")
+}
+
 module.exports = {
     userById,
-    hasAuthourization
+    hasAuthourization,
+    allUsers
 }
