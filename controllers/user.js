@@ -36,8 +36,15 @@ const allUsers = async(req, res) => {
     }).select("name email updated created")
 }
 
+const getUser = (req, res ) => {
+    req.profile.hashed_password = undefined,
+    req.profile.salt = undefined
+    return res.json(req.profile);
+}
+
 module.exports = {
     userById,
     hasAuthourization,
-    allUsers
+    allUsers,
+    getUser
 }
