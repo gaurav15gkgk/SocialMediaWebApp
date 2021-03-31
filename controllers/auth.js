@@ -64,7 +64,8 @@ const signout = (req, res) => {
 
 const requireSignin = expressJwt({
     secret: process.env.JWT_SECRET,
-    algorithms: ['HS256']
+    algorithms: ['HS256'],
+    userProperty: "auth"
 })
 
 module.exports = {
