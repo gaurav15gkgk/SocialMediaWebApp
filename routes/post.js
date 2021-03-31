@@ -16,7 +16,7 @@ const { userById } = require("../controllers/user")
 const router = express.Router()
 
 //to get all the posts
-router.get('/', getPosts)
+router.get('/posts', getPosts)
 
 //to create new post user authentication required
 router.post('/post/new/:userId',requireSignin , createPost, createPostValidator)
