@@ -1,5 +1,6 @@
 const formidable = require('formidable')
 const fs = require('fs')
+const _ = require('lodash')
 
 const Post = require('../models/post')
 
@@ -100,11 +101,26 @@ const deletePost = (req, res) => {
     })
 }
 
+const updatePost = (req, res, next) => {
+    let post = req.post;
+    post = _.extend(post, req.body)
+    post.updated = Date.now()
+    post.save(err => {
+        if(err){
+            return res.status(400).json({
+                error: err
+            })
+        }
+    })
+    res.json(post)
+}
+
 module.exports = {
     getPosts,
     createPost,
     postsByUser,
     postById,
     isPoster,
-    deletePost
+    deletePost,
+    updatePost
 }
